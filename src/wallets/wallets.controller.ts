@@ -21,6 +21,23 @@ export class WalletsController {
     return this.walletsService.findOne(id);
   }
 
+  @Post(':id/assets')
+  createWalletAsset(
+    @Param('id') id: string,
+    @Body()
+    body: {
+      walletId: string;
+      assetId: string;
+      shares: number;
+    },
+  ) {
+    return this.walletsService.createWalletAsset({
+      assetId: body.assetId,
+      walletId: id,
+      shares: body.shares,
+    });
+  }
+
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateWalletDto: UpdateWalletDto) {
   //   return this.walletsService.update(+id, updateWalletDto);
